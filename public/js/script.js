@@ -6,9 +6,9 @@ function obtener() {
       data.forEach((element) => {
         contenido.innerHTML += `<div class="shadow-lg rounded-lg">
         <a href="#">
-          <img
+          <img style="width:344px;height:344px;"
             class="rounded-t-lg"
-            src="${element.ImagenesUrl}"
+            src="${element.ImagenesURL}"
             alt="pala1"
         /></a>
         <div class="p-5">

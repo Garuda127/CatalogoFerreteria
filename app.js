@@ -24,7 +24,7 @@ app.use(express.static("public")); //Static files
 //obtener productos cards
 app.get("/cards", (req, res) => {
   connection.query(
-    "SELECT p.Nombre,p.Marca,p.Precio,i.ImagenesUrl FROM productos p JOIN imagenes i WHERE p.ID_producto = i.productos_ID_producto AND p.ID_producto != i.productos_ID_producto",
+    "SELECT Nombre, ImagenesURL FROM productos ",
     (err, rows, fields) => {
       if (err) {
         console.log(err);
