@@ -23,16 +23,19 @@ app.use(express.static("public")); //Static files
 
 //obtener productos cards
 app.get("/cards", (req, res) => {
-  connection.query("SELECT p.Nombre,p.Marca,p.Precio,i.ImagenesUrl FROM productos p JOIN imagenes i WHERE p.ID_producto = i.productos_ID_producto", (err, rows, fields) => {
-    if (err) {
-      console.log(err);
-    } 
-    if (rows.length > 0) {
-     res.json(rows);
-    } else {
-      res.send("No hay productos");
+  connection.query(
+    "SELECT p.Nombre,p.Marca,p.Precio,i.ImagenesUrl FROM productos p JOIN imagenes i WHERE p.ID_producto = i.productos_ID_producto AND p.ID_producto != i.productos_ID_producto",
+    (err, rows, fields) => {
+      if (err) {
+        console.log(err);
+      }
+      if (rows.length > 0) {
+        res.json(rows);
+      } else {
+        res.send("No hay productos");
+      }
     }
-  });
+  );
 });
 // all productos
 app.get("/productos", (req, res) => {
