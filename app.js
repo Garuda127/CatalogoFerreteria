@@ -76,6 +76,7 @@ app.post("/add", (req, res) => {
     Precio: req.body.Precio,
     Descripcion: req.body.Descripcion,
     InVentario: req.body.InVentario,
+    ImagenesURL: req.body.ImagenesURL,
   };
   connection.query(sql, productoOBJ, (err, results) => {
     if (err) throw err;
@@ -126,5 +127,3 @@ connection.connect((err) => {
 });
 //app listen
 app.listen(port, () => console.log(`localhost:${port}!`));
-
-//""
