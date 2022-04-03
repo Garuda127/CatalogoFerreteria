@@ -84,8 +84,8 @@ app.use(express.json());
 app.get("/", (req, res) => {});
 
 app.post("/login", (req, res) => {
-  const { username, password } = req.body;
-  if (username === "admin" && password === "admin") {
+  const { username, password, admin } = req.body;
+  if (username === "admin" && password === "admin" && admin === true) {
     const token = jwt.sign({ username }, app.get("key"), {
       expiresIn: "1h",
     });
@@ -127,6 +127,7 @@ app.get("/verificacion", verificacion, (req, res) => {
     message: "Tienes permisos",
   });
 });
+// rutas protegidas
 //agregar productos
 app.post("/add", verificacion, (req, res) => {
   const sql = `INSERT INTO productos SET ?`;
