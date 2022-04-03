@@ -65,8 +65,70 @@ app.get("/productos/:id", (req, res) => {
     }
   });
 });
+
+//check connection
+connection.connect((err) => {
+  if (err) throw err;
+  console.log("connected");
+});
+//app listen
+app.listen(port, () => console.log(`localhost:${port}!`));
+
+//jwt
+const jwt = require("jsonwebtoken");
+const keys = require("./settings/keys");
+app.set("key", keys.key);
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.get("/", (req, res) => {});
+
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  if (username === "admin" && password === "admin") {
+    const token = jwt.sign({ username }, app.get("key"), {
+      expiresIn: "1h",
+    });
+    res.json({
+      token,
+    });
+  } else {
+    res.send("Usuario o contraseña incorrectos");
+  }
+});
+//verificar token
+const verificacion = express.Router();
+verificacion.use((req, res, next) => {
+  let token = req.headers["x-access-token"] || req.headers["authorization"];
+  if (!token) {
+    res.status(401).send({
+      message: "No tienes permisos",
+    });
+    return;
+  }
+  if (token.startWith("Bearer")) {
+    token = token.slice(7, token.length);
+    console.log(token);
+  }
+  jwt.verify(token, app.get("key"), (err, decoded) => {
+    if (err) {
+      res.status(401).send({
+        message: "Token invalido",
+      });
+      return;
+    }
+    req.user = decoded.username;
+    next();
+  });
+});
+// verificar token
+app.get("/verificacion", verificacion, (req, res) => {
+  res.json({
+    message: "Tienes permisos",
+  });
+});
 //agregar productos
-app.post("/add", (req, res) => {
+app.post("/add", verificacion, (req, res) => {
   const sql = `INSERT INTO productos SET ?`;
   const productoOBJ = {
     ID_producto: req.body.ID_producto,
@@ -84,7 +146,7 @@ app.post("/add", (req, res) => {
   });
 });
 //actualizar productos
-app.put("/update/:id", (req, res) => {
+app.put("/update/:id", verificacion, (req, res) => {
   const { id } = req.params;
   const {
     ID_producto,
@@ -111,7 +173,7 @@ app.put("/update/:id", (req, res) => {
   });
 });
 //eliminar productos
-app.delete("/delete/:id", (req, res) => {
+app.delete("/delete/:id", verificacion, (req, res) => {
   const { id } = req.params;
   const sql = `DELETE FROM productos WHERE ID_producto = ${id}`;
   connection.query(sql, (err, results) => {
@@ -119,11 +181,3 @@ app.delete("/delete/:id", (req, res) => {
     res.send("Producto eliminado");
   });
 });
-
-//check connection
-connection.connect((err) => {
-  if (err) throw err;
-  console.log("connected");
-});
-//app listen
-app.listen(port, () => console.log(`localhost:${port}!`));
