@@ -12,7 +12,15 @@
   "license": "ISC",
   "dependencies": {
     "body-parse": "^0.1.0",
+    "datatables.net-autofill-dt": "^2.3.9",
+    "datatables.net-buttons-dt": "^2.2.2",
+    "datatables.net-dt": "^1.11.5",
+    "datatables.net-responsive-dt": "^2.2.9",
+    "datatables.net-rowreorder-dt": "^1.2.8",
+    "datatables.net-searchpanes-dt": "^2.0.0",
+    "ejs": "^3.1.6",
     "express": "^4.17.3",
+    "express-ejs-layouts": "^2.5.1",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.15"

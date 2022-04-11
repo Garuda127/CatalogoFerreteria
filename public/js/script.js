@@ -83,4 +83,6 @@ function obtener() {
       </div>`;
       });
     });
-}
+} // fin de la funcion obtener
+
+

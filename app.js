@@ -4,8 +4,12 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
-
+const  expressLayouts = require("express-ejs-layouts");
 app.use(bodyParser.json());
+
+//ejs
+app.set("view engine", "ejs");
+app.use(expressLayouts);
 
 //MYsql
 const connection = mysql.createConnection({
@@ -14,7 +18,9 @@ const connection = mysql.createConnection({
   password: "toor",
   database: "ferre",
 });
-
+//utilidades
+const router= require("./routes/router");
+app.use(router.routes);
 //Routes
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/index.html"));
