@@ -1,14 +1,14 @@
 vistaPrincipal = (req, res) => {
-  res.render("inicio");
+  res.render("inicio", { extractScripts: true });
 };
 vistaTabProductos = (req, res) => {
-  res.render("TabProductos");
+  res.render("TabProductos", { extractScripts: true });
 };
 vistaTabCategorias = (req, res) => {
-  res.render("TabCategorias");
+  res.render("TabCategorias", { extractScripts: true });
 };
 vistaTabUsuarios = (req, res) => {
-  res.render("TabUsuarios");
+  res.render("TabUsuarios", { extractScripts: true });
 };
 
 module.exports = {

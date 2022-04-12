@@ -4,7 +4,7 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
-const  expressLayouts = require("express-ejs-layouts");
+const expressLayouts = require("express-ejs-layouts");
 app.use(bodyParser.json());
 
 //ejs
@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
   database: "ferre",
 });
 //utilidades
-const router= require("./routes/router");
+const router = require("./routes/router");
 app.use(router.routes);
 //Routes
 app.get("/", (req, res) => {
@@ -47,7 +47,8 @@ app.get("/cards", (req, res) => {
 app.get("/productos", (req, res) => {
   connection.query("SELECT * FROM productos", (err, results) => {
     if (err) {
-      console.log("Error en la consulta");
+      console.log(err);
+      throw err;
     }
     if (results.length > 0) {
       res.json(results);
@@ -55,7 +56,6 @@ app.get("/productos", (req, res) => {
       res.send("No hay productos");
     }
   });
-  connection.end();
 });
 //productos por id
 app.get("/productos/:id", (req, res) => {

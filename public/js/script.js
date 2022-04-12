@@ -84,5 +84,3 @@ function obtener() {
       });
     });
 } // fin de la funcion obtener
-
-

@@ -5,11 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/dist/tailwind.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.datatables.net/v/dt/jq-3.6.0/jszip-2.5.0/dt-1.11.5/af-2.3.7/b-2.2.2/b-html5-2.2.2/b-print-2.2.2/cr-1.5.5/kt-2.6.4/r-2.2.9/sb-1.3.2/sl-1.3.4/datatables.css"
-    />
+
     <script src="/public/js/script.js"></script>
 
     <title>Admin Panel</title>
@@ -135,6 +131,26 @@
       <!-- Contenido -->
     </div>
     <!-- Scrips -->
-    <%- script %>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/v/dt/jq-3.6.0/jszip-2.5.0/dt-1.11.5/af-2.3.7/b-2.2.2/b-html5-2.2.2/b-print-2.2.2/cr-1.5.5/kt-2.6.4/r-2.2.9/sb-1.3.2/sl-1.3.4/datatables.js"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        $("#TabProductos").DataTable({
+          language: {
+            url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+          },
+        });
+      });
+    </script>
   </body>
 </html>
