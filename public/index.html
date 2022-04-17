@@ -6,9 +6,15 @@
     <link href="./dist/tailwind.css" rel="stylesheet" />
     <title>Ferreteria</title>
     <script src="js/script.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/css/splide.min.css"
+    />
   </head>
 
-  <body onload="obtener()">
+  <body
+    onload="obtener1(),obtener2(),obtener3(),obtener4(),obtener5(),obtener6()"
+  >
     <div class="container mx-auto p-5">
       <div class="md:flex md:flex-row justify-between">
         <div class="flex flex-row justify-center">
@@ -62,8 +68,8 @@
         </div>
       </div>
       <!-- NavBar ^-->
-      <div class="md:flex md:flex-row mt-20">
-        <div class="w-full flex flex-col justify-center">
+      <div class="md:flex md:flex-row mt-20 md:h-screen">
+        <div class="w-3/5 flex flex-col mt-56">
           <h2
             class="font-serif text-5xl text-gray-600 mb-3 text-center md:text-left"
           >
@@ -81,15 +87,15 @@
             >Compra Ahora</a
           >
         </div>
-        <div class="md:w-3/5 w-full">
+        <div class="md:w-10/12 w-full flex flex-col mt-32">
           <img alt="No se XD" src="./img/banner.jpg" class="w-full" />
           <!-- https://www.freepik.es/vectores/caja-herramientas' Vector de caja de herramientas creado por pch.vector - www.freepik.es -->
         </div>
       </div>
       <!-- Banner ^-->
-      <div class="my-20">
+      <div class="mb-10">
         <div class="flex flex-row justify-between my-5">
-          <h2 class="text-3xl">Categoria1</h2>
+          <h2 class="text-3xl">Herramientas</h2>
           <a href="#" class="text-xl flex flex-row">
             Ver todo
             <svg
@@ -108,14 +114,155 @@
           ></a>
         </div>
         <!-- categoria 1 title -->
+
         <div
-          id="categoria1"
           class="grid grid-flow-row grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
+          id="categoria1"
         ></div>
       </div>
       <!-- categoria 1 ^ -->
-    </div>
+      <div class="mb-10">
+        <div class="flex flex-row justify-between my-5">
+          <h2 class="text-3xl">Material electrico</h2>
+          <a href="#" class="text-xl flex flex-row">
+            Ver todo
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-7 w-5 ml-2 inline-block"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              /></svg
+          ></a>
+        </div>
+        <!-- categoria 2 title -->
 
+        <div
+          class="grid grid-flow-row grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
+          id="categoria2"
+        ></div>
+      </div>
+      <!-- categoria 2 ^ -->
+      <div class="mb-10">
+        <div class="flex flex-row justify-between my-5">
+          <h2 class="text-3xl">Material para plomeria</h2>
+          <a href="#" class="text-xl flex flex-row">
+            Ver todo
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-7 w-5 ml-2 inline-block"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              /></svg
+          ></a>
+        </div>
+        <!-- categoria 1 title -->
+
+        <div
+          class="grid grid-flow-row grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
+          id="categoria3"
+        ></div>
+      </div>
+      <!-- categoria 3 ^ -->
+      <div class="mb-10">
+        <div class="flex flex-row justify-between my-5">
+          <h2 class="text-3xl">Hogar</h2>
+          <a href="#" class="text-xl flex flex-row">
+            Ver todo
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-7 w-5 ml-2 inline-block"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              /></svg
+          ></a>
+        </div>
+        <!-- categoria 1 title -->
+
+        <div
+          class="grid grid-flow-row grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
+          id="categoria4"
+        ></div>
+      </div>
+      <!-- categoria 4 ^ -->
+      <div class="mb-10">
+        <div class="flex flex-row justify-between my-5">
+          <h2 class="text-3xl">Jardin</h2>
+          <a href="#" class="text-xl flex flex-row">
+            Ver todo
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-7 w-5 ml-2 inline-block"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              /></svg
+          ></a>
+        </div>
+        <!-- categoria 1 title -->
+
+        <div
+          class="grid grid-flow-row grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
+          id="categoria5"
+        ></div>
+      </div>
+      <!-- categoria 5 ^ -->
+      <div class="mb-10">
+        <div class="flex flex-row justify-between my-5">
+          <h2 class="text-3xl">Proteccion</h2>
+          <a href="#" class="text-xl flex flex-row">
+            Ver todo
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-7 w-5 ml-2 inline-block"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              /></svg
+          ></a>
+        </div>
+        <!-- categoria 1 title -->
+
+        <div
+          class="grid grid-flow-row grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
+          id="categoria6"
+        ></div>
+      </div>
+      <!-- categoria 6 ^ -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/js/splide.js"></script>
     <script src="js/script.js"></script>
   </body>
   <footer>

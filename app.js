@@ -28,9 +28,10 @@ app.get("/", (req, res) => {
 app.use(express.static("public")); //Static files
 
 //obtener productos cards
-app.get("/cards", (req, res) => {
+app.get("/cards/:id", (req, res) => {
+  const { id } = req.params;
   connection.query(
-    "SELECT Nombre, ImagenesURL FROM productos ",
+    `SELECT Nombre, ImagenesURL,Precio FROM productos WHERE ID_Categorias = ${id} `,
     (err, rows, fields) => {
       if (err) {
         console.log(err);
@@ -186,5 +187,135 @@ app.delete("/delete/:id", verificacion, (req, res) => {
   connection.query(sql, (err, results) => {
     if (err) throw err;
     res.send("Producto eliminado");
+  });
+});
+//categorias
+// all Categorias
+app.get("/categorias", (req, res) => {
+  connection.query("SELECT * FROM categorias", (err, results) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    }
+    if (results.length > 0) {
+      res.json(results);
+    } else {
+      res.send("No hay productos");
+    }
+  });
+});
+//categorias por id
+app.get("/categorias/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = `SELECT * FROM categorias WHERE ID_Categorias = ${id}`;
+  connection.query(sql, (err, results) => {
+    if (err) throw err;
+
+    if (results.length > 0) {
+      res.json(results);
+    } else {
+      res.send("No hay productos");
+    }
+  });
+});
+// rutas protegidas
+//agregar Categorias
+app.post("/categoria/add", verificacion, (req, res) => {
+  const sql = `INSERT INTO categorias SET ?`;
+  const productoOBJ = {
+    ID_Categorias: req.body.ID_Categorias,
+    Nombre: req.body.Nombre,
+  };
+  connection.query(sql, productoOBJ, (err, results) => {
+    if (err) throw err;
+    res.send("Categoria Agregada");
+  });
+});
+//actualizar Categoria
+app.put("/categoria/update/:id", verificacion, (req, res) => {
+  const { id } = req.params;
+  const { ID_Categorias, Nombre } = req.body;
+  const sql = `UPDATE categorias SET ? WHERE ID_Categorias = ${id}`;
+  const productoOBJ = {
+    ID_Categorias,
+    Nombre,
+  };
+  connection.query(sql, productoOBJ, (err, results) => {
+    if (err) throw err;
+    res.send("Categoria actualizada");
+  });
+});
+//eliminar Categoria
+app.delete("/categoria/delete/:id", verificacion, (req, res) => {
+  const { id } = req.params;
+  const sql = `DELETE FROM categorias WHERE ID_Categorias = ${id}`;
+  connection.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send("Categoria eliminada");
+  });
+});
+//Usuarios
+// all Usuarios
+app.get("/usuarios", (req, res) => {
+  connection.query("SELECT * FROM categorias", (err, results) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    }
+    if (results.length > 0) {
+      res.json(results);
+    } else {
+      res.send("No hay productos");
+    }
+  });
+});
+//categorias por id
+app.get("/usuarios/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = `SELECT * FROM categorias WHERE ID_Categorias = ${id}`;
+  connection.query(sql, (err, results) => {
+    if (err) throw err;
+
+    if (results.length > 0) {
+      res.json(results);
+    } else {
+      res.send("No hay productos");
+    }
+  });
+});
+// rutas protegidas
+//agregar Categorias
+app.post("/usuarios/add", verificacion, (req, res) => {
+  const sql = `INSERT INTO categorias SET ?`;
+  const productoOBJ = {
+    ID_Categorias: req.body.ID_Categorias,
+    Nombre: req.body.Nombre,
+  };
+  connection.query(sql, productoOBJ, (err, results) => {
+    if (err) throw err;
+    res.send("Categoria Agregada");
+  });
+});
+//actualizar Usuarios
+app.put("/usuarios/update/:id", verificacion, (req, res) => {
+  const { id } = req.params;
+  const { ID_Categorias, Nombre } = req.body;
+  const sql = `UPDATE categorias SET ? WHERE ID_Categorias = ${id}`;
+  const productoOBJ = {
+    ID_Categorias,
+    Nombre,
+  };
+  connection.query(sql, productoOBJ, (err, results) => {
+    if (err) throw err;
+    res.send("Usuario actualizada");
+  });
+});
+//eliminar Categoria
+app.delete("/usuarios/delete/:id", verificacion, (req, res) => {
+  const { id } = req.params;
+  const sql = `DELETE FROM categorias WHERE ID_Categorias = ${id}`;
+  connection.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send("Categoria eliminada");
   });
 });
