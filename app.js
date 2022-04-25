@@ -2,22 +2,29 @@ const express = require("express");
 const mysql = require("mysql");
 const path = require("path");
 const app = express();
+const morgan = require("morgan");
 const port = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
 const expressLayouts = require("express-ejs-layouts");
 app.use(bodyParser.json());
+
+//middleware
 
 //ejs
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 
 //MYsql
+app.use(morgan("dev"));
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "toor",
   database: "ferre",
 });
+
+app.use(express.urlencoded({ extended: false }));
+
 //utilidades
 const router = require("./routes/router");
 app.use(router.routes);
@@ -84,31 +91,38 @@ app.listen(port, () => console.log(`localhost:${port}!`));
 //jwt
 const jwt = require("jsonwebtoken");
 const keys = require("./settings/keys");
+const { redirect } = require("express/lib/response");
 app.set("key", keys.key);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get("/", (req, res) => {});
-
 app.post("/login", (req, res) => {
-  const { username, password, admin } = req.body;
-  if (username === "admin" && password === "admin" && admin === true) {
+  const { username, password } = req.body;
+  if (username === "admin" && password === "admin") {
     const token = jwt.sign({ username }, app.get("key"), {
       expiresIn: "1h",
     });
-    res.json({
-      token,
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 3600000,
     });
+    res.redirect(`/admin`);
   } else {
+    console.log(req.body);
     res.send("Usuario o contraseña incorrectos");
   }
 });
 //verificar token
 const verificacion = express.Router();
 verificacion.use((req, res, next) => {
-  let token = req.headers["x-access-token"] || req.headers["authorization"];
+  let token =
+    req.headers["x-access-token"] ||
+    req.headers["authorization"] ||
+    req.cookies.token ||
+    req.query.token; // Express headers are auto converted to lowercase
   if (!token) {
-    res.status(401).send({
+    res.status(40).send({
       message: "No tienes permisos",
     });
     return;
@@ -119,7 +133,7 @@ verificacion.use((req, res, next) => {
   }
   jwt.verify(token, app.get("key"), (err, decoded) => {
     if (err) {
-      res.status(401).send({
+      res.status(403).send({
         message: "Token invalido",
       });
       return;
@@ -136,10 +150,9 @@ app.get("/verificacion", verificacion, (req, res) => {
 });
 // rutas protegidas
 //agregar productos
-app.post("/add", verificacion, (req, res) => {
+app.post("/add", (req, res) => {
   const sql = `INSERT INTO productos SET ?`;
   const productoOBJ = {
-    ID_producto: req.body.ID_producto,
     ID_Categorias: req.body.ID_Categorias,
     Nombre: req.body.Nombre,
     Marca: req.body.Marca,
@@ -154,7 +167,7 @@ app.post("/add", verificacion, (req, res) => {
   });
 });
 //actualizar productos
-app.put("/update/:id", verificacion, (req, res) => {
+app.put("/update/:id", (req, res) => {
   const { id } = req.params;
   const {
     ID_producto,
@@ -181,7 +194,7 @@ app.put("/update/:id", verificacion, (req, res) => {
   });
 });
 //eliminar productos
-app.delete("/delete/:id", verificacion, (req, res) => {
+app.delete("/delete/:id", (req, res) => {
   const { id } = req.params;
   const sql = `DELETE FROM productos WHERE ID_producto = ${id}`;
   connection.query(sql, (err, results) => {
@@ -220,7 +233,7 @@ app.get("/categorias/:id", (req, res) => {
 });
 // rutas protegidas
 //agregar Categorias
-app.post("/categoria/add", verificacion, (req, res) => {
+app.post("/categoria/add", (req, res) => {
   const sql = `INSERT INTO categorias SET ?`;
   const productoOBJ = {
     ID_Categorias: req.body.ID_Categorias,
@@ -232,7 +245,7 @@ app.post("/categoria/add", verificacion, (req, res) => {
   });
 });
 //actualizar Categoria
-app.put("/categoria/update/:id", verificacion, (req, res) => {
+app.put("/categoria/update/:id", (req, res) => {
   const { id } = req.params;
   const { ID_Categorias, Nombre } = req.body;
   const sql = `UPDATE categorias SET ? WHERE ID_Categorias = ${id}`;
@@ -246,7 +259,7 @@ app.put("/categoria/update/:id", verificacion, (req, res) => {
   });
 });
 //eliminar Categoria
-app.delete("/categoria/delete/:id", verificacion, (req, res) => {
+app.delete("/categoria/delete/:id", (req, res) => {
   const { id } = req.params;
   const sql = `DELETE FROM categorias WHERE ID_Categorias = ${id}`;
   connection.query(sql, (err, results) => {
@@ -285,7 +298,7 @@ app.get("/usuarios/:id", (req, res) => {
 });
 // rutas protegidas
 //agregar Categorias
-app.post("/usuarios/add", verificacion, (req, res) => {
+app.post("/usuarios/add", (req, res) => {
   const sql = `INSERT INTO categorias SET ?`;
   const productoOBJ = {
     ID_Categorias: req.body.ID_Categorias,
@@ -297,7 +310,7 @@ app.post("/usuarios/add", verificacion, (req, res) => {
   });
 });
 //actualizar Usuarios
-app.put("/usuarios/update/:id", verificacion, (req, res) => {
+app.put("/usuarios/update/:id", (req, res) => {
   const { id } = req.params;
   const { ID_Categorias, Nombre } = req.body;
   const sql = `UPDATE categorias SET ? WHERE ID_Categorias = ${id}`;
@@ -311,7 +324,7 @@ app.put("/usuarios/update/:id", verificacion, (req, res) => {
   });
 });
 //eliminar Categoria
-app.delete("/usuarios/delete/:id", verificacion, (req, res) => {
+app.delete("/usuarios/delete/:id", (req, res) => {
   const { id } = req.params;
   const sql = `DELETE FROM categorias WHERE ID_Categorias = ${id}`;
   connection.query(sql, (err, results) => {

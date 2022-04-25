@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/dist/tailwind.css" />
+  </head>
+  <body>
+    <div>
+      <h1 class="text-center text-4xl font-sans text-slate-400">
+        Agregar Producto Nuevo
+      </h1>
+    </div>
+    <div class="w-full">
+      <form class="grid justify-items-center" action="/add" method="post">
+        <label class="mx-4 w-3/4" for="category">Selecciona categoria:</label>
+        <select
+          class="w-3/4 mb-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+          name="category"
+          id="SelectCat"
+          required
+        >
+          <option value="1">Herramientas</option>
+          <option value="2">Material electrico</option>
+          <option value="3">Material para Plomeria</option>
+          <option value="4">Hogar</option>
+          <option value="5">Jardin</option>
+          <option value="6">Proteccion</option>
+        </select>
+        <input
+          id="nombre"
+          class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+          type="text"
+          placeholder="Nombre Producto"
+          required
+        />
+        <input
+          id="Marca"
+          class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+          type="text"
+          placeholder="Marca"
+          required
+        />
+        <input
+          id="Precio"
+          class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+          type="number"
+          placeholder="Precio"
+          required
+        />
+        <input
+          id="Descripcion"
+          class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+          type="text"
+          placeholder="Descripcion"
+          required
+        />
+        <input
+          id="Cantidad"
+          class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+          type="number"
+          placeholder="Cantidad"
+          required
+        />
+        <input
+          id="Imagen"
+          class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+          type="url"
+          placeholder="ImagenURL"
+        />
+        <!-- submit -->
+        <input
+          id="submit"
+          class="w-3/4 my-2 mx-4 rounded-md bg-gradient-to-r from-purple-400 to-pink-400 text-slate-100 focus:bg-pink-700 focus:text-white focus:outline-none focus:shadow-outline-pink px-1 hover:from-pink-500 hover:to-pink-500"
+          value="Agregar"
+          type="button"
+          onclick="postadd()"
+        />
+      </form>
+    </div>
+    <script>
+      const submit = document.getElementById("submit");
+      submit.addEventListener("click", postadd);
+      function postadd() {
+        let _url = "http://localhost:3000/add";
+        let _Cate = document.getElementById("SelectCat").value;
+        let _Nombre = document.getElementById("nombre").value;
+        let _Marca = document.getElementById("Marca").value;
+        let _Precio = document.getElementById("Precio").value;
+        let _Descripcion = document.getElementById("Descripcion").value;
+        let _Cantidad = document.getElementById("Cantidad").value;
+        let _Imagen = document.getElementById("Imagen").value;
+        /*post fetch*/
+        fetch(_url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ID_Categorias: _Cate,
+            Nombre: _Nombre,
+            Marca: _Marca,
+            Precio: _Precio,
+            Descripcion: _Descripcion,
+            InVentario: _Cantidad,
+            ImagenesURL: _Imagen,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.error(error))
+          .then(console.log(postadd));
+      }
+    </script>
+  </body>
+</html>

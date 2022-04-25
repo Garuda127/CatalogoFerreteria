@@ -10,10 +10,14 @@ vistaTabCategorias = (req, res) => {
 vistaTabUsuarios = (req, res) => {
   res.render("TabUsuarios", { extractScripts: true });
 };
+vistaAddProducto = (req, res) => {
+  res.render("addProductos", { extractScripts: true });
+};
 
 module.exports = {
   vistaPrincipal,
   vistaTabCategorias,
   vistaTabProductos,
   vistaTabUsuarios,
+  vistaAddProducto,
 };

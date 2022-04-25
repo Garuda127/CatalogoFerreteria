@@ -29,11 +29,12 @@
             >
               <h3 class="font-bold text-gray-50 text-center">Ingresar</h3>
             </div>
-            <form action="Ingresar">
+            <form action="/login" method="post">
               <div class="p-3">
                 <label class="form-label">Usuario</label>
                 <input
-                  type="email"
+                  name="username"
+                  type="text"
                   placeholder="Jhon-Smith"
                   class="form-control"
                 />
@@ -41,25 +42,28 @@
               <div class="p-3">
                 <label class="form-label">Contraseña</label>
                 <input
+                  name="password"
                   type="password"
                   placeholder="123456"
                   class="form-control"
                 />
               </div>
-            </form>
-            <div
-              class="text-center h-12 card-footer bg-gradient-to-r from-purple-700 to-red-700"
-            >
-              <button
-                type="submit"
-                class="w-full h-full font-bold hover:bg-gradient-to-r from-lime-500 to-orange-500 text-gray-50"
+              <div
+                class="text-center h-12 card-footer bg-gradient-to-r from-purple-700 to-red-700"
               >
-                Entrar
-              </button>
-            </div>
+                <button
+                  type="submit"
+                  class="w-full h-full font-bold hover:bg-gradient-to-r from-lime-500 to-orange-500 text-gray-50"
+                >
+                  Entrar
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
+
+    <script></script>
   </body>
 </html>
