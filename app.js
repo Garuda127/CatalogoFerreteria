@@ -17,10 +17,10 @@ app.use(expressLayouts);
 //MYsql
 app.use(morgan("dev"));
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "toor",
-  database: "ferre",
+  host: "byliwhgf4byww7xk5wbr-mysql.services.clever-cloud.com",
+  user: "un1hz5wj4mku04ov",
+  password: "ConbOaDclrsI27S0f2rq",
+  database: "byliwhgf4byww7xk5wbr",
 });
 
 app.use(express.urlencoded({ extended: false }));
