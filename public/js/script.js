@@ -5,7 +5,7 @@ var contenido4 = document.getElementById("categoria4");
 var contenido5 = document.getElementById("categoria5");
 var contenido6 = document.getElementById("categoria6");
 function obtener1() {
-  fetch("http://localhost:3000/cards/1")
+  fetch("/cards/1")
     .then((res) => res.json())
     .then((data) => {
       data.forEach((element) => {
@@ -86,7 +86,7 @@ function obtener1() {
     });
 } // fin de la funcion obtener
 function obtener2() {
-  fetch("http://localhost:3000/cards/2")
+  fetch("/cards/2")
     .then((res) => res.json())
     .then((data) => {
       data.forEach((element) => {
@@ -167,7 +167,7 @@ function obtener2() {
     });
 } // fin de la funcion obtener
 function obtener3() {
-  fetch("http://localhost:3000/cards/3")
+  fetch("/cards/3")
     .then((res) => res.json())
     .then((data) => {
       data.forEach((element) => {
@@ -248,7 +248,7 @@ function obtener3() {
     });
 } // fin de la funcion obtener
 function obtener4() {
-  fetch("http://localhost:3000/cards/4")
+  fetch("/cards/4")
     .then((res) => res.json())
     .then((data) => {
       data.forEach((element) => {
@@ -329,7 +329,7 @@ function obtener4() {
     });
 } // fin de la funcion obtener
 function obtener5() {
-  fetch("http://localhost:3000/cards/5")
+  fetch("/cards/5")
     .then((res) => res.json())
     .then((data) => {
       data.forEach((element) => {
@@ -410,7 +410,7 @@ function obtener5() {
     });
 } // fin de la funcion obtener
 function obtener6() {
-  fetch("http://localhost:3000/cards/6")
+  fetch("/cards/6")
     .then((res) => res.json())
     .then((data) => {
       data.forEach((element) => {
