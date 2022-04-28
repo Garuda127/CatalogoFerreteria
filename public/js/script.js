@@ -4,18 +4,19 @@ var contenido3 = document.getElementById("categoria3");
 var contenido4 = document.getElementById("categoria4");
 var contenido5 = document.getElementById("categoria5");
 var contenido6 = document.getElementById("categoria6");
+
 function obtener1() {
-  fetch("/cards/1")
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((element) => {
-        contenido1.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
+    fetch("/cards/1")
+        .then((res) => res.json())
+        .then((data) => {
+            data.forEach((element) => {
+                contenido1.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
         <a href="#">
           <img
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -82,21 +83,21 @@ function obtener1() {
         </div>
         <!-- seccion abajo -->
       </div>`;
-      });
-    });
+            });
+        });
 } // fin de la funcion obtener
 function obtener2() {
-  fetch("/cards/2")
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((element) => {
-        contenido2.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
+    fetch("/cards/2")
+        .then((res) => res.json())
+        .then((data) => {
+            data.forEach((element) => {
+                contenido2.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
         <a href="#">
           <img
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -163,21 +164,21 @@ function obtener2() {
         </div>
         <!-- seccion abajo -->
       </div>`;
-      });
-    });
+            });
+        });
 } // fin de la funcion obtener
 function obtener3() {
-  fetch("/cards/3")
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((element) => {
-        contenido3.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
+    fetch("/cards/3")
+        .then((res) => res.json())
+        .then((data) => {
+            data.forEach((element) => {
+                contenido3.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
         <a href="#">
           <img
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -244,21 +245,21 @@ function obtener3() {
         </div>
         <!-- seccion abajo -->
       </div>`;
-      });
-    });
+            });
+        });
 } // fin de la funcion obtener
 function obtener4() {
-  fetch("/cards/4")
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((element) => {
-        contenido4.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
+    fetch("/cards/4")
+        .then((res) => res.json())
+        .then((data) => {
+            data.forEach((element) => {
+                contenido4.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
         <a href="#">
           <img
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -325,21 +326,21 @@ function obtener4() {
         </div>
         <!-- seccion abajo -->
       </div>`;
-      });
-    });
+            });
+        });
 } // fin de la funcion obtener
 function obtener5() {
-  fetch("/cards/5")
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((element) => {
-        contenido5.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
+    fetch("/cards/5")
+        .then((res) => res.json())
+        .then((data) => {
+            data.forEach((element) => {
+                contenido5.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
         <a href="#">
           <img
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -406,21 +407,21 @@ function obtener5() {
         </div>
         <!-- seccion abajo -->
       </div>`;
-      });
-    });
+            });
+        });
 } // fin de la funcion obtener
 function obtener6() {
-  fetch("/cards/6")
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((element) => {
-        contenido6.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
+    fetch("/cards/6")
+        .then((res) => res.json())
+        .then((data) => {
+            data.forEach((element) => {
+                contenido6.innerHTML += `<div class="shadow-lg rounded-lg h-auto">
         <a href="#">
           <img
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -487,6 +488,6 @@ function obtener6() {
         </div>
         <!-- seccion abajo -->
       </div>`;
-      });
-    });
+            });
+        });
 } // fin de la funcion obtener

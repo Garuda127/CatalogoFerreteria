@@ -50,13 +50,37 @@
   src="https://cdn.datatables.net/v/dt/jq-3.6.0/jszip-2.5.0/dt-1.11.5/af-2.3.7/b-2.2.2/b-html5-2.2.2/b-print-2.2.2/cr-1.5.5/kt-2.6.4/r-2.2.9/sb-1.3.2/sl-1.3.4/datatables.js"
 ></script>
 <script>
+  let editor;
+
   $(document).ready(function () {
-    var url = "http://localhost:3000/productos";
+    var url = "/productos";
     $("#TabProductos").DataTable({
       ajax: {
         url: url,
         dataSrc: "",
       },
+      //select: true,
+      select: {
+        style: "single",
+      },
+      //responsive
+      responsive: true,
+      //scrollX
+      scrollX: true,
+      //scrollY
+      scrollY: "400px",
+      //scrollCollapse
+      scrollCollapse: true,
+      //paging
+      paging: true,
+      //info
+      info: true,
+      //filter
+      filter: true,
+      //order
+      order: [[0, "asc"]],
+      //columns
+
       columns: [
         { data: "ID_producto" },
         { data: "ID_Categorias" },
@@ -70,6 +94,83 @@
       language: {
         url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
       },
+      dom: "Bfrtip",
+
+      buttons: [
+        {
+          extend: "copy",
+          text: "Copiar",
+          className: "btn btn-primary",
+        },
+        {
+          extend: "csv",
+          text: "CSV",
+          className: "btn btn-primary",
+        },
+        {
+          extend: "excel",
+          text: "Excel",
+          className: "btn btn-primary",
+        },
+        {
+          extend: "pdf",
+          text: "PDF",
+          className: "btn btn-primary",
+        },
+        {
+          extend: "print",
+          text: "Imprimir",
+          className: "btn btn-primary",
+        },
+        //delete
+        {
+          text: "Eliminar",
+          Message: "¿Esta seguro de eliminar este registro?",
+
+          className: "bg-red-400",
+
+          action: function (e, dt, node, config) {
+            var data = dt.row({ selected: true }).data();
+            var id = data.ID_producto;
+
+            var url = "/delete/" + id;
+            //confirmar
+            Swal.fire({
+              title: "¿Esta seguro de eliminar este registro?",
+              text: "No podras recuperarlo!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Si, eliminar!",
+              cancelButtonText: "Cancelar",
+            }).then((result) => {
+              if (result.value) {
+                $.ajax({
+                  url: url,
+                  type: "DELETE",
+                  success: function (data) {
+                    Swal.fire(
+                      "Eliminado!",
+                      "El registro ha sido eliminado.",
+                      "success"
+                    );
+                    dt.ajax.reload();
+                  },
+                  error: function (data) {
+                    Swal.fire(
+                      "Error!",
+                      "El registro no pudo ser eliminado.",
+                      "error"
+                    );
+                  },
+                });
+              }
+            });
+          },
+        },
+      ],
     });
   });
 </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
