@@ -1,6 +1,6 @@
 <div class="flex justify-end mb-10">
   <a
-    href=""
+    href="/admin/addCategorias"
     class="text-gray-600 bg-green-500 shadow-md rounded-full px-3 py-1 hover:bg-green-400"
   >
     <svg
@@ -45,16 +45,96 @@
 ></script>
 <script>
   $(document).ready(function () {
-    var url = "http://localhost:3000/categorias";
+    var url = "/categorias";
     $("#TabProductos").DataTable({
       ajax: {
         url: url,
         dataSrc: "",
       },
+      //select: true,
+      select: {
+        style: "single",
+      },
+      //responsive
+      responsive: true,
+
+      //dom
+      dom: "Bfrtip",
+      //scrollY
+      scrollY: "400px",
+      //scrollCollapse
+      scrollCollapse: true,
+      //paging
+      paging: true,
+      //info
+      info: true,
+      //filter
+      filter: true,
+      //order
+      order: [[0, "asc"]],
       columns: [{ data: "ID_Categorias" }, { data: "Nombre" }],
       language: {
         url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
       },
+      //delete
+      buttons: [
+        {
+          text: "Eliminar",
+          Message: "¿Esta seguro de eliminar este registro?",
+
+          className: "bg-red-400",
+          action: function (e, dt, node, config) {
+            var data = dt.row({ selected: true }).data();
+            var id = data.ID_Categorias;
+            var url = "/categoria/delete/" + id;
+            //confirmar
+            Swal.fire({
+              title: "¿Estas seguro?",
+              text: "No podras recuperar esta información!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Si, Eliminar!",
+            }).then((result) => {
+              if (result.value) {
+                $.ajax({
+                  url: url,
+                  type: "DELETE",
+                  success: function (data) {
+                    Swal.fire(
+                      "Eliminado!",
+                      "Se ha eliminado la categoria",
+                      "success"
+                    );
+                    dt.ajax.reload();
+                  },
+                  error: function (data) {
+                    Swal.fire(
+                      "Error!",
+                      "No se pudo eliminar la categoria",
+                      "error"
+                    );
+                  },
+                });
+              }
+            });
+          },
+        },
+      ],
     });
   });
 </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.datatables.net/v/dt/jq-3.6.0/jszip-2.5.0/dt-1.11.5/af-2.3.7/b-2.2.2/b-html5-2.2.2/b-print-2.2.2/cr-1.5.5/kt-2.6.4/r-2.2.9/sb-1.3.2/sl-1.3.4/datatables.js"
+></script>

@@ -17,14 +17,7 @@
       name="ID_Categorias"
       id="SelectCat"
       required
-    >
-      <option value="1">Herramientas</option>
-      <option value="2">Material electrico</option>
-      <option value="3">Material para Plomeria</option>
-      <option value="4">Hogar</option>
-      <option value="5">Jardin</option>
-      <option value="6">Proteccion</option>
-    </select>
+    ></select>
     <input
       name="Nombre"
       class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
@@ -46,13 +39,14 @@
       placeholder="Precio"
       required
     />
-    <input
+    <textarea
       name="Descripcion"
       class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
-      type="text"
+      type="area"
       placeholder="Descripcion"
+      rows="5"
       required
-    />
+    ></textarea>
     <input
       name="InVentario"
       class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
@@ -60,7 +54,9 @@
       placeholder="Cantidad"
       required
     />
+
     <input
+      id="UriImg"
       name="ImagenesURL"
       class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
       type="text"
@@ -74,6 +70,10 @@
       onclick="alerta()"
     />
   </form>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <input id="file" type="file" name="file" />
+    <input class="bg-green-500" type="submit" value="Subir" />
+  </form>
 </div>
 <script>
   //Alerta agregar producto
@@ -84,3 +84,20 @@
 </script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  //get categoria
+  var select = document.getElementById("SelectCat");
+  fetch("/categorias")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      data.forEach(function (categoria) {
+        var option = document.createElement("option");
+        option.text = categoria.Nombre;
+        option.value = categoria.ID_Categorias;
+        select.add(option);
+      });
+    });
+</script>
+<script src="/"></script>

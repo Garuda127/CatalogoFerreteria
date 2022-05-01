@@ -23,7 +23,7 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Nombre</th>
+        <th>Usuario</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -45,13 +45,13 @@
 ></script>
 <script>
   $(document).ready(function () {
-    var url = "http://localhost:3000/categorias";
+    var url = "/usuarios";
     $("#TabProductos").DataTable({
       ajax: {
         url: url,
         dataSrc: "",
       },
-      columns: [{ data: "ID_Categorias" }, { data: "Nombre" }],
+      columns: [{ data: "ID_USER" }, { data: "USER" }],
       language: {
         url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
       },

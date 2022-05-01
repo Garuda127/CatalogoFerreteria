@@ -6,9 +6,19 @@ const morgan = require("morgan");
 const port = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
 const expressLayouts = require("express-ejs-layouts");
+const fileUpload = require("express-fileupload");
 app.use(bodyParser.json());
+app.use(fileUpload());
+//file upload
 
-//middleware
+app.post("/upload", (req, res) => {
+  let EDFile = req.files.file;
+  EDFile.mv(`./public/img/Productos/${EDFile.name}`, (err) => {
+    if (err) return res.status(500).send({ message: err });
+
+    return res.status(200).send({ message: "File uploaded!" });
+  });
+});
 
 //ejs
 app.set("view engine", "ejs");
@@ -59,7 +69,7 @@ app.get("/cards/:id", (req, res) => {
     }
   );
 });
-//searh productos
+//search productos
 app.get("/search/:id", (req, res) => {
   const { id } = req.params;
   connection.query(
@@ -114,66 +124,6 @@ connection.connect((err) => {
 //app listen
 app.listen(port, () => console.log(`localhost:${port}!`));
 
-//jwt
-const jwt = require("jsonwebtoken");
-const keys = require("./settings/keys");
-const { redirect } = require("express/lib/response");
-app.set("key", keys.key);
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-app.post("/login", (req, res) => {
-  const { username, password } = req.body;
-  if (username === "admin" && password === "admin") {
-    const token = jwt.sign({ username }, app.get("key"), {
-      expiresIn: "1h",
-    });
-
-    res.cookie("token", token, {
-      httpOnly: true,
-      maxAge: 3600000,
-    });
-    res.redirect(`/admin`);
-  } else {
-    console.log(req.body);
-    res.send("Usuario o contraseña incorrectos");
-  }
-});
-//verificar token
-const verificacion = express.Router();
-verificacion.use((req, res, next) => {
-  let token =
-    req.headers["x-access-token"] ||
-    req.headers["authorization"] ||
-    req.cookies.token ||
-    req.query.token; // Express headers are auto converted to lowercase
-  if (!token) {
-    res.status(40).send({
-      message: "No tienes permisos",
-    });
-    return;
-  }
-  if (token.startWith("Bearer")) {
-    token = token.slice(7, token.length);
-    console.log(token);
-  }
-  jwt.verify(token, app.get("key"), (err, decoded) => {
-    if (err) {
-      res.status(403).send({
-        message: "Token invalido",
-      });
-      return;
-    }
-    req.user = decoded.username;
-    next();
-  });
-});
-// verificar token
-app.get("/verificacion", verificacion, (req, res) => {
-  res.json({
-    message: "Tienes permisos",
-  });
-});
 // rutas protegidas
 //agregar productos
 
@@ -191,7 +141,6 @@ app.post("/add", (req, res) => {
   connection.query(sql, productoOBJ, (err, results) => {
     if (err) throw err;
 
-   
     //se agrego correctamente
   });
 });
@@ -262,10 +211,9 @@ app.get("/categorias/:id", (req, res) => {
 });
 // rutas protegidas
 //agregar Categorias
-app.post("/categoria/add", (req, res) => {
+app.post("/api/categoria/add", (req, res) => {
   const sql = `INSERT INTO categorias SET ?`;
   const productoOBJ = {
-    ID_Categorias: req.body.ID_Categorias,
     Nombre: req.body.Nombre,
   };
   connection.query(sql, productoOBJ, (err, results) => {
@@ -299,7 +247,7 @@ app.delete("/categoria/delete/:id", (req, res) => {
 //Usuarios
 // all Usuarios
 app.get("/usuarios", (req, res) => {
-  connection.query("SELECT * FROM categorias", (err, results) => {
+  connection.query("SELECT ID_USER,USER FROM usuarios", (err, results) => {
     if (err) {
       console.log(err);
       throw err;
@@ -307,42 +255,42 @@ app.get("/usuarios", (req, res) => {
     if (results.length > 0) {
       res.json(results);
     } else {
-      res.send("No hay productos");
+      res.send("No hay Usuarios");
     }
   });
 });
 //categorias por id
 app.get("/usuarios/:id", (req, res) => {
   const { id } = req.params;
-  const sql = `SELECT * FROM categorias WHERE ID_Categorias = ${id}`;
+  const sql = `SELECT ID_USER,USER FROM usuarios WHERE ID_USER = ${id}`;
   connection.query(sql, (err, results) => {
     if (err) throw err;
 
     if (results.length > 0) {
       res.json(results);
     } else {
-      res.send("No hay productos");
+      res.send("No hay Usuarios");
     }
   });
 });
 // rutas protegidas
 //agregar Categorias
 app.post("/usuarios/add", (req, res) => {
-  const sql = `INSERT INTO categorias SET ?`;
+  const sql = `INSERT INTO usuarios SET ?`;
   const productoOBJ = {
-    ID_Categorias: req.body.ID_Categorias,
-    Nombre: req.body.Nombre,
+    USER: req.body.USER,
+    PASSWORD: req.body.PASSWORD,
   };
   connection.query(sql, productoOBJ, (err, results) => {
     if (err) throw err;
-    res.send("Categoria Agregada");
+    res.send("Usuario Agregado");
   });
 });
 //actualizar Usuarios
 app.put("/usuarios/update/:id", (req, res) => {
   const { id } = req.params;
   const { ID_Categorias, Nombre } = req.body;
-  const sql = `UPDATE categorias SET ? WHERE ID_Categorias = ${id}`;
+  const sql = `UPDATE usuarios SET ? WHERE ID_USER = ${id}`;
   const productoOBJ = {
     ID_Categorias,
     Nombre,
@@ -352,12 +300,12 @@ app.put("/usuarios/update/:id", (req, res) => {
     res.send("Usuario actualizada");
   });
 });
-//eliminar Categoria
+//eliminar Usuarios
 app.delete("/usuarios/delete/:id", (req, res) => {
   const { id } = req.params;
   const sql = `DELETE FROM categorias WHERE ID_Categorias = ${id}`;
   connection.query(sql, (err, results) => {
     if (err) throw err;
-    res.send("Categoria eliminada");
+    res.send("Usuario Eliminado");
   });
 });

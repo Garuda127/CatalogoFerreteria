@@ -581,3 +581,6 @@ function buscar() {
 function alerta() {
   alert("Producto agregado correctamente");
 }
+
+//slider
+
