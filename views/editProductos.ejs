@@ -1,0 +1,131 @@
+<div>
+  <h1 class="text-center text-4xl font-sans text-slate-400">Editar Producto</h1>
+  <a
+    href="/admin/productos"
+    class="text-gray-600 bg-green-500 shadow-md rounded-full px-3 py-1 hover:bg-green-400"
+  >
+    Regresar</a
+  >
+</div>
+<div class="w-full">
+  <form class="grid justify-items-center" action="/update/" method="post">
+    <label class="mx-4 w-3/4" for="ID_Categorias">Selecciona categoria:</label>
+    <select
+      class="w-3/4 mb-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+      name="ID_Categorias"
+      id="SelectCat"
+      required
+    ></select>
+    <input
+      id="Nombre"
+      name="Nombre"
+      class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+      type="text"
+      placeholder="Nombre Producto"
+      required
+    />
+    <input
+      id="Marca"
+      name="Marca"
+      class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+      type="text"
+      placeholder="Marca"
+      required
+    />
+    <input
+      id="precio"
+      name="Precio"
+      class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+      type="number"
+      placeholder="Precio"
+      required
+    />
+    <textarea
+      id="descripcion"
+      name="Descripcion"
+      class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+      type="area"
+      placeholder="Descripcion"
+      rows="5"
+      required
+    ></textarea>
+    <input
+      id="Cantidad"
+      name="InVentario"
+      class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+      type="number"
+      placeholder="Cantidad"
+      required
+    />
+
+    <input
+      id="UriImg"
+      name="ImagenesURL"
+      class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+      type="text"
+      placeholder="Url de la Imagen"
+    />
+    <!-- submit -->
+    <input
+      type="submit"
+      class="w-3/4 my-2 mx-4 rounded-md bg-gradient-to-r from-purple-400 to-pink-400 text-slate-100 focus:bg-pink-700 focus:text-white focus:outline-none focus:shadow-outline-pink px-1 hover:from-pink-500 hover:to-pink-500"
+      value="Agregar"
+      onclick="alerta()"
+    />
+  </form>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <input id="file" type="file" name="file" />
+    <input class="bg-green-500" type="submit" value="Subir" />
+  </form>
+</div>
+<script>
+  //Alerta agregar producto
+
+  function alerta() {
+    Swal.fire("agregado!", "se agrego un producto correctamente", "success");
+  }
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  //get categoria
+  var select = document.getElementById("SelectCat");
+  fetch("/categorias")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      data.forEach(function (categoria) {
+        var option = document.createElement("option");
+        option.text = categoria.Nombre;
+        option.value = categoria.ID_Categorias;
+        select.add(option);
+      });
+    });
+</script>
+<script src="/"></script>
+<script>
+  //getproductos
+  let select = document.getElementById("SelectCat");
+  let Nombre = document.getElementById("Nombre");
+  let Marca = document.getElementById("Marca");
+  let Precio = document.getElementById("precio");
+  let Descripcion = document.getElementById("descripcion");
+  let Cantidad = document.getElementById("Cantidad");
+  let UriImg = document.getElementById("UriImg");
+  fetch("/productos")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      data.forEach(function (producto) {
+        select.text = producto.ID_Categorias;
+        Nombre.text = producto.Nombre;
+        Marca.text = producto.Marca;
+        Precio.text = producto.Precio;
+        Descripcion.text = producto.Descripcion;
+        Cantidad.text = producto.InVentario;
+        UriImg.text = producto.ImagenesURL;
+      });
+    });
+</script>

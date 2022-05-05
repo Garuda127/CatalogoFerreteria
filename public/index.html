@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./dist/tailwind.css" rel="stylesheet" />
     <title>Ferreteria</title>
+    <link rel="stylesheet" href="dist/owl.carousel.scss" />
+    <link rel="stylesheet" href="dist/owl.theme.default.scss" />
     <script src="js/script.js"></script>
     <link
       rel="stylesheet"
@@ -123,13 +125,9 @@
         <!-- categoria 1 title -->
 
         <div
-          class="grid grid-flow-row grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
+          class="owl-carousel owl-theme owl-loaded grid grid-flow-row grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
           id="categoria1"
-        >
-        <!-- slider -->
-        
-
-      </div>
+        ></div>
       </div>
       <!-- categoria 1 ^ -->
       <div class="mb-10">
@@ -273,8 +271,20 @@
       </div>
       <!-- categoria 6 ^ -->
     </div>
+  </div>
+    <script src="js/owl.carousel.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/js/splide.js"></script>
     <script src="js/script.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".owl-carousel").owlCarousel();
+      });
+    </script>
   </body>
   <footer>
     <div

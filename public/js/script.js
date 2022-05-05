@@ -15,7 +15,7 @@ function obtener1() {
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -96,7 +96,7 @@ function obtener2() {
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -177,7 +177,7 @@ function obtener3() {
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -258,7 +258,7 @@ function obtener4() {
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -339,7 +339,7 @@ function obtener5() {
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -420,7 +420,7 @@ function obtener6() {
             style="width: 250px; height: 250px"
             class="rounded-t-lg m-auto hover:opacity-80"
             src="${element.ImagenesURL}"
-            alt="pala1"
+            alt=""
         /></a>
         <div class="p-5">
           <h3>
@@ -583,4 +583,3 @@ function alerta() {
 }
 
 //slider
-

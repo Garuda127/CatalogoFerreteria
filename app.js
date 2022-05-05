@@ -115,7 +115,22 @@ app.get("/productos/:id", (req, res) => {
     }
   });
 });
+//edit productos
+app.get("/editProductos/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = `SELECT * FROM productos WHERE ID_producto = ${id}`;
+  connection.query(sql, (err, results) => {
+    if (err) throw err;
 
+    if (results.length > 0) {
+      
+      res.headersSent(req.params).loca;
+      
+    } else {
+      res.send("No hay productos");
+    }
+  });
+});
 //check connection
 connection.connect((err) => {
   if (err) throw err;
@@ -125,6 +140,20 @@ connection.connect((err) => {
 app.listen(port, () => console.log(`localhost:${port}!`));
 
 // rutas protegidas
+//login
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  const sql = `SELECT * FROM usuarios WHERE USER = '${username}' AND PASSWORD = '${password}'`;
+  connection.query(sql, (err, results) => {
+    if (err) throw err;
+    if (results.length > 0) {
+      res.redirect("/admin");
+    } else {
+      res.send("No hay usuarios");
+    }
+  });
+});
+//registro
 //agregar productos
 
 app.post("/add", (req, res) => {
@@ -140,22 +169,15 @@ app.post("/add", (req, res) => {
   };
   connection.query(sql, productoOBJ, (err, results) => {
     if (err) throw err;
-
+    res.redirect("/admin/productos");
     //se agrego correctamente
   });
 });
 //actualizar productos
 app.put("/update/:id", (req, res) => {
   const { id } = req.params;
-  const {
-    ID_producto,
-    ID_Categorias,
-    Nombre,
-    Marca,
-    Precio,
-    Descripcion,
-    InVentario,
-  } = req.body;
+  const { ID_Categorias, Nombre, Marca, Precio, Descripcion, InVentario } =
+    req.body;
   const sql = `UPDATE productos SET ? WHERE ID_producto = ${id}`;
   const productoOBJ = {
     ID_producto,

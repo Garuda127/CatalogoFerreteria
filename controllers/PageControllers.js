@@ -16,6 +16,9 @@ vistaAddProducto = (req, res) => {
 vistaAddCategoria = (req, res) => {
   res.render("AddCategoria", { extractScripts: true });
 };
+vistaEditProducto = (req, res) => {
+  res.render("editProductos", { extractScripts: true });
+};
 
 module.exports = {
   vistaPrincipal,
@@ -24,4 +27,5 @@ module.exports = {
   vistaTabUsuarios,
   vistaAddProducto,
   vistaAddCategoria,
+  vistaEditProducto,
 };
