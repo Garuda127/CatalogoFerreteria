@@ -7,6 +7,8 @@ const port = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
 const expressLayouts = require("express-ejs-layouts");
 const fileUpload = require("express-fileupload");
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
 app.use(bodyParser.json());
 app.use(fileUpload());
 //file upload
@@ -123,9 +125,6 @@ app.get("/editProductos/:id", (req, res) => {
     if (err) throw err;
 
     if (results.length > 0) {
-      
-      res.headersSent(req.params).loca;
-      
     } else {
       res.send("No hay productos");
     }
@@ -180,7 +179,6 @@ app.put("/update/:id", (req, res) => {
     req.body;
   const sql = `UPDATE productos SET ? WHERE ID_producto = ${id}`;
   const productoOBJ = {
-    ID_producto,
     ID_Categorias,
     Nombre,
     Marca,
@@ -190,7 +188,8 @@ app.put("/update/:id", (req, res) => {
   };
   connection.query(sql, productoOBJ, (err, results) => {
     if (err) throw err;
-    res.send("Producto actualizado");
+    res.redirect("/admin/productos");
+    //se agrego correctamente
   });
 });
 //eliminar productos

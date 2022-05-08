@@ -15,5 +15,5 @@ router.get("/admin/categorias", vistaTabCategorias);
 router.get("/admin/usuarios", vistaTabUsuarios);
 router.get("/admin/addProductos", vistaAddProducto);
 router.get("/admin/addCategorias", vistaAddCategoria);
-router.get("/admin/editProductos", vistaEditProducto);
+router.get("/admin/editProductos/:id", vistaEditProducto);
 module.exports = { routes: router };

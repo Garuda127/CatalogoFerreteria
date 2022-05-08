@@ -125,7 +125,7 @@
           className: "btn btn-primary",
           action: function (e, dt, node, config) {
             var data = dt.row({ selected: true }).data();
-            window.location.href = "/admin/editProductos";
+            window.location.href = "/admin/editProductos/" + data.ID_producto;
           },
         },
         ,

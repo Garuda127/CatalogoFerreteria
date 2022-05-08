@@ -1,5 +1,7 @@
+<div class="hidden"><input id="value" type="hidden"  style="display:none; visibility: hidden; " class="text-white"><%= id%></input></div>
 <div>
   <h1 class="text-center text-4xl font-sans text-slate-400">Editar Producto</h1>
+
   <a
     href="/admin/productos"
     class="text-gray-600 bg-green-500 shadow-md rounded-full px-3 py-1 hover:bg-green-400"
@@ -8,7 +10,8 @@
   >
 </div>
 <div class="w-full">
-  <form class="grid justify-items-center" action="/update/" method="post">
+  <form class="grid justify-items-center" action="/update/<%= id%>?_method=PUT" method="post">
+    
     <label class="mx-4 w-3/4" for="ID_Categorias">Selecciona categoria:</label>
     <select
       class="w-3/4 mb-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
@@ -69,15 +72,16 @@
     <input
       type="submit"
       class="w-3/4 my-2 mx-4 rounded-md bg-gradient-to-r from-purple-400 to-pink-400 text-slate-100 focus:bg-pink-700 focus:text-white focus:outline-none focus:shadow-outline-pink px-1 hover:from-pink-500 hover:to-pink-500"
-      value="Agregar"
+      value="Editar"
       onclick="alerta()"
     />
   </form>
-  <form action="/upload" method="POST" enctype="multipart/form-data">
+  <!--  <form action="/upload" method="POST" enctype="multipart/form-data">
     <input id="file" type="file" name="file" />
     <input class="bg-green-500" type="submit" value="Subir" />
-  </form>
-</div>
+  </form> -->
+  
+
 <script>
   //Alerta agregar producto
 
@@ -103,29 +107,31 @@
       });
     });
 </script>
-<script src="/"></script>
+<script></script>
 <script>
   //getproductos
-  let select = document.getElementById("SelectCat");
+  let cat5 = document.getElementById("SelectCat");
   let Nombre = document.getElementById("Nombre");
   let Marca = document.getElementById("Marca");
   let Precio = document.getElementById("precio");
   let Descripcion = document.getElementById("descripcion");
   let Cantidad = document.getElementById("Cantidad");
   let UriImg = document.getElementById("UriImg");
-  fetch("/productos")
+  let value = document.getElementById("value");
+  fetch("/productos/" + value.value)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       data.forEach(function (producto) {
-        select.text = producto.ID_Categorias;
-        Nombre.text = producto.Nombre;
-        Marca.text = producto.Marca;
-        Precio.text = producto.Precio;
-        Descripcion.text = producto.Descripcion;
-        Cantidad.text = producto.InVentario;
-        UriImg.text = producto.ImagenesURL;
+        console.log(data);
+        cat5.value = producto.ID_Categorias;
+        Nombre.value = producto.Nombre;
+        Marca.value = producto.Marca;
+        Precio.value = producto.Precio;
+        Descripcion.value = producto.Descripcion;
+        Cantidad.value = producto.InVentario;
+        UriImg.value = producto.ImagenesURL;
       });
     });
 </script>

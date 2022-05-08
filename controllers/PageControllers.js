@@ -17,7 +17,8 @@ vistaAddCategoria = (req, res) => {
   res.render("AddCategoria", { extractScripts: true });
 };
 vistaEditProducto = (req, res) => {
-  res.render("editProductos", { extractScripts: true });
+  console.log(req.params);
+  res.render("editProductos", { extractScripts: true, id: req.params.id });
 };
 
 module.exports = {
