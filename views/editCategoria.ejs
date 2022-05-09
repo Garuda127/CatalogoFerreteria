@@ -1,0 +1,58 @@
+<div class=""><input id="value" type="hidden"  style="display:none; visibility: hidden; " class="text-white"><%= id%></input></div>
+<div>
+  <h1 class="text-center text-4xl font-sans text-slate-400">
+    Editar Categoria
+  </h1>
+  <a
+    href="/admin/addCategorias"
+    class="text-gray-600 bg-green-500 shadow-md rounded-full px-3 py-1 hover:bg-green-400"
+  >
+    Regresar</a
+  >
+</div>
+<div class="w-full">
+  <form
+    class="grid justify-items-center"
+    action="/api/categoria/update/<%= id%>?_method=PUT"
+    method="post"
+  >
+    <input
+      id="nombre"
+      name="Nombre"
+      class="w-3/4 my-2 mx-4 rounded-md ring-2 ring-pink-300 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink px-1"
+      type="text"
+      placeholder="Nombre de Categoria"
+      required
+    />
+
+    <!-- submit -->
+    <input
+      type="submit"
+      class="w-3/4 my-2 mx-4 rounded-md bg-gradient-to-r from-purple-400 to-pink-400 text-slate-100 focus:bg-pink-700 focus:text-white focus:outline-none focus:shadow-outline-pink px-1 hover:from-pink-500 hover:to-pink-500"
+      value="Editar"
+      onclick="alerta()"
+    />
+  </form>
+</div>
+<script>
+  //Alerta agregar producto
+
+  function alerta() {
+    Swal.fire("Editado!", "se a editardo categoria correctamente", "success");
+  }
+</script>
+<script>
+
+  let nombre= document.getElementById("nombre");
+  let valor = document.getElementById("value").value;
+  fetch("/categorias/<%= id%>")
+    .then((response) => response.json())
+    .then((data) => {
+      nombre.value = data[0].Nombre;
+     
+      
+    });
+    
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

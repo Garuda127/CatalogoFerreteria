@@ -1,5 +1,3 @@
 module.exports = {
-    key:"clavesecreta1234"
+  key: "clavesecreta1234",
 };
-
-

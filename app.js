@@ -248,17 +248,16 @@ app.post("/api/categoria/add", (req, res) => {
   });
 });
 //actualizar Categoria
-app.put("/categoria/update/:id", (req, res) => {
+app.put("/api/categoria/update/:id", (req, res) => {
   const { id } = req.params;
-  const { ID_Categorias, Nombre } = req.body;
+  const { Nombre } = req.body;
   const sql = `UPDATE categorias SET ? WHERE ID_Categorias = ${id}`;
   const productoOBJ = {
-    ID_Categorias,
     Nombre,
   };
   connection.query(sql, productoOBJ, (err, results) => {
     if (err) throw err;
-    res.send("Categoria actualizada");
+    res.redirect("/admin/categorias");
   });
 });
 //eliminar Categoria
@@ -267,7 +266,7 @@ app.delete("/categoria/delete/:id", (req, res) => {
   const sql = `DELETE FROM categorias WHERE ID_Categorias = ${id}`;
   connection.query(sql, (err, results) => {
     if (err) throw err;
-    res.send("Categoria eliminada");
+    res.redirect("/admin/categorias");
   });
 });
 //Usuarios

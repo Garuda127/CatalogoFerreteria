@@ -79,7 +79,15 @@
       //delete
       buttons: [
         //editar
-
+        {
+          text: "Editar",
+          className: "btn btn-primary",
+          action: function (e, dt, node, config) {
+            var data = dt.row({ selected: true }).data();
+            window.location.href =
+              "/admin/editCategorias/" + data.ID_Categorias;
+          },
+        },
         {
           text: "Eliminar",
           Message: "¿Esta seguro de eliminar este registro?",
