@@ -26,21 +26,29 @@ app.post("/upload", (req, res) => {
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 
-//MYsql
 app.use(morgan("dev"));
+//MySQL localhost
 /*const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "toor",
+  database: "ferre",
+});
+connection.connect((err) => {
+  if (err) throw err;
+  console.log("Connected!");
+});
+*/
+//MySQL Cloud
+const connection = mysql.createConnection({
   host: "byliwhgf4byww7xk5wbr-mysql.services.clever-cloud.com",
   user: "un1hz5wj4mku04ov",
   password: "ConbOaDclrsI27S0f2rq",
   database: "byliwhgf4byww7xk5wbr",
 });
-*/
-app.use(morgan("dev"));
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "toor",
-  database: "ferre",
+connection.connect((err) => {
+  if (err) throw err;
+  console.log("Connected!");
 });
 
 app.use(express.urlencoded({ extended: false }));
@@ -130,11 +138,7 @@ app.get("/editProductos/:id", (req, res) => {
     }
   });
 });
-//check connection
-connection.connect((err) => {
-  if (err) throw err;
-  console.log("connected");
-});
+
 //app listen
 app.listen(port, () => console.log(`localhost:${port}!`));
 
@@ -172,6 +176,7 @@ app.post("/add", (req, res) => {
     //se agrego correctamente
   });
 });
+
 //actualizar productos
 app.put("/update/:id", (req, res) => {
   const { id } = req.params;
