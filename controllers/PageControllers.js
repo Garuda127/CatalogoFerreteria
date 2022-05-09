@@ -20,6 +20,10 @@ vistaEditProducto = (req, res) => {
   console.log(req.params);
   res.render("editProductos", { extractScripts: true, id: req.params.id });
 };
+vistaEditCategoria = (req, res) => {
+  console.log(req.params);
+  res.render("editCategoria", { extractScripts: true, id: req.params.id });
+};
 
 module.exports = {
   vistaPrincipal,
@@ -29,4 +33,5 @@ module.exports = {
   vistaAddProducto,
   vistaAddCategoria,
   vistaEditProducto,
+  vistaEditCategoria,
 };
