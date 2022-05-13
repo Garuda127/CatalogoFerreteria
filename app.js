@@ -28,7 +28,7 @@ app.use(expressLayouts);
 
 app.use(morgan("dev"));
 //MySQL localhost
-/*const connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "toor",
@@ -38,7 +38,7 @@ connection.connect((err) => {
   if (err) throw err;
   console.log("Connected!");
 });
-*/
+/*
 //MySQL Cloud
 const connection = mysql.createConnection({
   host: "byliwhgf4byww7xk5wbr-mysql.services.clever-cloud.com",
@@ -50,7 +50,7 @@ connection.connect((err) => {
   if (err) throw err;
   console.log("Connected!");
 });
-
+*/
 app.use(express.urlencoded({ extended: false }));
 
 //utilidades
