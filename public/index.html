@@ -27,7 +27,7 @@
           <h1 class="text-3xl text-gray-600 ml-2">Loma bonita</h1>
           <!-- logo -->
         </div>
-        <div class="md:w-2/4 lg:w-4/6 hidden md:block">
+        <div class="md:w-2/4 lg:w-4/6  md:block">
           <a href="#" onclick="buscar()" title="Buscar">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -50,11 +50,32 @@
             id="busqueda"
             type="text"
             placeholder="Search"
-            class="font-sans block text-sm w-full pl-10 py-2 px-3 ring-2 ring-pink-300 text-slate-500 rounded-lg caret-pink-500 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink"
+            class="w-10/12 inline-block font-sans block text-sm sm:w-full pl-10 py-2 px-3 ring-2 ring-pink-300 text-slate-500 rounded-lg caret-pink-500 focus:ring-pink-500 focus:outline-none focus:outline-pink-500 focus:shadow-outline-pink"
             onkeypress="buscar()"
           />
+          <div class="md:text-gray-50 sm:hidden mx-1  mt-2 inline-block">
+            <a
+              href="signup.html"
+              class="bg-purple-700 rounded-full text-gray-50 p-2 hover:bg-purple-600"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 inline-block"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                />
+              </svg>
+              </a
+            >
+          </div>
         </div>
-        <div class="mt-2 hidden md:block">
+        <div class="md:text-gray-50 hidden  mt-2  sm:block">
           <a
             href="signup.html"
             class="bg-purple-700 rounded-full text-gray-50 p-2 hover:bg-purple-600"
@@ -75,6 +96,7 @@
             Ingresar</a
           >
         </div>
+      
       </div>
       <!-- NavBar ^-->
       <div class="flex" id="searchresult"></div>

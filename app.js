@@ -27,7 +27,7 @@ app.set("view engine", "ejs");
 app.use(expressLayouts);
 
 app.use(morgan("dev"));
-//MySQL localhost
+/*//MySQL localhost
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -37,20 +37,31 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
   if (err) throw err;
   console.log("Connected!");
-});
-/*
+}); */
+
 //MySQL Cloud
+/*
 const connection = mysql.createConnection({
   host: "byliwhgf4byww7xk5wbr-mysql.services.clever-cloud.com",
   user: "un1hz5wj4mku04ov",
   password: "ConbOaDclrsI27S0f2rq",
   database: "byliwhgf4byww7xk5wbr",
 });
+
+*/
+
+//MYSQL Google
+const connection = mysql.createConnection({
+  host: "34.68.235.170",
+  user: "Admin",
+  password: "toor",
+  database: "ferre",
+});
 connection.connect((err) => {
   if (err) throw err;
   console.log("Connected!");
 });
-*/
+
 app.use(express.urlencoded({ extended: false }));
 
 //utilidades
